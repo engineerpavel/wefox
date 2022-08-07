@@ -8,18 +8,13 @@
     </ng-template>
   </p-toolbar>
   <p-table #dt [value]="locations" [rows]="10" [paginator]="true"
-           [globalFilterFields]="['name','country.name','representative.name','status']"
+           [globalFilterFields]="['title, content', 'created_at', 'updated_at']"
            [(selection)]="selectedLocations" [rowHover]="true" dataKey="id"
            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
            [showCurrentPageReport]="true">
     <ng-template pTemplate="caption">
       <div class="p-d-flex p-ai-center p-jc-between">
         <h5 class="p-m-0">Manage locations</h5>
-        <span class="p-input-icon-left">
-              <i class="pi pi-search"></i>
-              <input pInputText type="text" (input)="dt.filterGlobal(($any($event.target).value), 'contains')"
-                     placeholder="Search..."/>
-        </span>
       </div>
     </ng-template>
     <ng-template pTemplate="header">
@@ -27,17 +22,17 @@
         <th style="width: 3rem">
           <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
         </th>
-        <th pSortableColumn="location">Location
-          <p-sortIcon field="location"></p-sortIcon>
+        <th pSortableColumn="title">Location
+          <p-sortIcon field="title"></p-sortIcon>
         </th>
-        <th pSortableColumn="description">Description
-          <p-sortIcon field="description"></p-sortIcon>
+        <th pSortableColumn="content">Description
+          <p-sortIcon field="content"></p-sortIcon>
         </th>
-        <th pSortableColumn="created-at">Created at
-          <p-sortIcon field="created-at"></p-sortIcon>
+        <th pSortableColumn="created_at">Created at
+          <p-sortIcon field="created_at"></p-sortIcon>
         </th>
-        <th pSortableColumn="updated-at">Updated at
-          <p-sortIcon field="updated-at"></p-sortIcon>
+        <th pSortableColumn="updated_at">Updated at
+          <p-sortIcon field="updated_at"></p-sortIcon>
         </th>
         <th>Map
         </th>
@@ -82,7 +77,7 @@
 
   <ng-template pTemplate="footer">
     <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
-    <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveProduct()"></button>
+    <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveLocation()"></button>
   </ng-template>
 </p-dialog>
 

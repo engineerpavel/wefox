@@ -2,7 +2,9 @@
   <div class="head">
     <h1>Wefox Frontend Challenge</h1>
   </div>
-  <app-wefox-table [locations]="(tableData | async)!">
+  <app-wefox-table (createLocation)="create($event)" (updateLocation)="update($event)" (removeLocation)="remove($event)"
+                   (removeLocations)="removeArr($event)"
+                   [locations]="(tableData | async)!">
 
   </app-wefox-table>
 </div>

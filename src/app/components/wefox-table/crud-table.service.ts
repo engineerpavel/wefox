@@ -26,11 +26,15 @@ export class CrudTableService {
     return this.http.post(`${environment.baseUrl}/api/v1/posts`, item);
   }
 
-  updateItem(item: LocationModel, itemId: string): Observable<any> {
-    return this.http.put(`${environment.baseUrl}/api/v1/posts/${itemId}`, item);
+  updateItem(item: LocationModel): Observable<any> {
+    return this.http.put(
+      `${environment.baseUrl}/api/v1/posts/${item.id}`,
+      item
+    );
   }
 
   removeItem(itemId: string): Observable<any> {
+    console.log('вот что мы удаляем!!!', itemId);
     return this.http.delete(`${environment.baseUrl}/api/v1/posts/${itemId}`);
   }
 

@@ -95,6 +95,11 @@ export class WefoxTableComponent {
     });
   }
 
+  editLocation(location: LocationModel) {
+    this.location = { ...location };
+    this.locationDialog = true;
+  }
+
   hideDialog() {
     this.locationDialog = false;
     this.submitted = false;
@@ -108,7 +113,7 @@ export class WefoxTableComponent {
         this.messageService.add({
           severity: 'success',
           summary: 'Successful',
-          detail: 'Product Updated',
+          detail: 'Location Updated',
           life: 3000,
         });
       } else {
@@ -116,7 +121,7 @@ export class WefoxTableComponent {
         this.messageService.add({
           severity: 'success',
           summary: 'Successful',
-          detail: 'Product Created',
+          detail: 'Location Created',
           life: 3000,
         });
       }

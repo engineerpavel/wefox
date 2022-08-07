@@ -51,10 +51,12 @@
         </td>
         <td>{{location.title}}</td>
         <td>{{location.content}}</td>
-        <td>1</td>
-        <td>2</td>
+        <td>{{location.created_at | date:'dd.MM.yyyy, HH:mm'}}</td>
+        <td>{{location.updated_at | date:'dd.MM.yyyy, HH:mm'}}</td>
         <td>3</td>
         <td>
+          <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2"
+                  (click)="editLocation(location)"></button>
           <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
                   (click)="deleteLocation(location)"></button>
         </td>

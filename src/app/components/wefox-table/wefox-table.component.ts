@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { LocationModel } from '../../models/tabledata.model';
 
@@ -12,6 +18,22 @@ import { LocationModel } from '../../models/tabledata.model';
 export class WefoxTableComponent {
   @Input()
   locations: LocationModel[] = [];
+
+  @Output()
+  createLocation: EventEmitter<LocationModel> = new EventEmitter<LocationModel>();
+
+  @Output()
+  updateLocation: EventEmitter<LocationModel> = new EventEmitter<LocationModel>();
+
+  @Output()
+  removeLocation: EventEmitter<number | undefined> = new EventEmitter<
+    number | undefined
+  >();
+
+  @Output()
+  removeLocations: EventEmitter<(number | undefined)[]> = new EventEmitter<
+    (number | undefined)[]
+  >();
 
   location: LocationModel = new LocationModel();
 
@@ -41,6 +63,8 @@ export class WefoxTableComponent {
         this.locations = this.locations.filter(
           (val) => !this.selectedLocations.includes(val)
         );
+        let ids = this.selectedLocations.map(({ id }) => id)!;
+        this.removeLocations.emit(ids);
         this.selectedLocations = [];
         this.messageService.add({
           severity: 'success',
@@ -58,15 +82,48 @@ export class WefoxTableComponent {
       header: 'Confirm',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
+        this.removeLocation.emit(this.location.id);
         this.locations = this.locations.filter((val) => val.id !== location.id);
         this.location = new LocationModel();
         this.messageService.add({
           severity: 'success',
           summary: 'Successful',
-          detail: 'Location deleted',
+          detail: 'Location ' + location.title + ' deleted',
           life: 3000,
         });
       },
     });
+  }
+
+  hideDialog() {
+    this.locationDialog = false;
+    this.submitted = false;
+  }
+
+  saveProduct() {
+    this.submitted = true;
+    if (this.location.title.trim()) {
+      if (this.location.id) {
+        this.updateLocation.emit(this.location);
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Successful',
+          detail: 'Product Updated',
+          life: 3000,
+        });
+      } else {
+        this.createLocation.emit(this.location);
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Successful',
+          detail: 'Product Created',
+          life: 3000,
+        });
+      }
+
+      this.locations = [...this.locations];
+      this.locationDialog = false;
+      this.location = new LocationModel();
+    }
   }
 }

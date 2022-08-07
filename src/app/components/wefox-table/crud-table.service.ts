@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { ITableData } from '../../interfaces/tabledata.interface';
+import { LocationModel } from '../../models/tabledata.model';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -10,21 +10,23 @@ import { Observable } from 'rxjs';
 export class CrudTableService {
   constructor(private http: HttpClient) {}
 
-  getList(): Observable<ITableData[]> {
-    return this.http.get<ITableData[]>(`${environment.baseUrl}/api/v1/posts`);
+  getList(): Observable<LocationModel[]> {
+    return this.http.get<LocationModel[]>(
+      `${environment.baseUrl}/api/v1/posts`
+    );
   }
 
-  showItem(itemId: string): Observable<ITableData> {
-    return this.http.get<ITableData>(
+  showItem(itemId: string): Observable<LocationModel> {
+    return this.http.get<LocationModel>(
       `${environment.baseUrl}/api/v1/posts/${itemId}`
     );
   }
 
-  createItem(item: ITableData): Observable<any> {
+  createItem(item: LocationModel): Observable<any> {
     return this.http.post(`${environment.baseUrl}/api/v1/posts`, item);
   }
 
-  updateItem(item: ITableData, itemId: string): Observable<any> {
+  updateItem(item: LocationModel, itemId: string): Observable<any> {
     return this.http.put(`${environment.baseUrl}/api/v1/posts/${itemId}`, item);
   }
 

@@ -34,7 +34,6 @@ export class CrudTableService {
   }
 
   removeItem(itemId: string): Observable<any> {
-    console.log('вот что мы удаляем!!!', itemId);
     return this.http.delete(`${environment.baseUrl}/api/v1/posts/${itemId}`);
   }
 

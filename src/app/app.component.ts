@@ -64,7 +64,7 @@ export class AppComponent implements OnInit {
         this.messageService.add({
           severity: 'success',
           summary: 'Successful',
-          detail: 'Location ' + res.title + ' deleted',
+          detail: 'Location deleted',
           life: 4000,
         });
         this.getLocations();

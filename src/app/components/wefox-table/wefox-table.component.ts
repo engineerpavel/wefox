@@ -59,7 +59,6 @@ export class WefoxTableComponent {
         let ids = this.selectedLocations.map(({id}) => id);
         this.removeLocations.emit(ids);
         this.selectedLocations = [];
-
       },
     });
   }
@@ -70,9 +69,8 @@ export class WefoxTableComponent {
       header: 'Confirm',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.removeLocation.emit(this.location.id);
+        this.removeLocation.emit(location.id);
         this.location = new LocationModel();
-
       },
     });
   }
@@ -85,6 +83,10 @@ export class WefoxTableComponent {
   hideDialog() {
     this.locationDialog = false;
     this.submitted = false;
+  }
+
+  showDetails() {
+
   }
 
   saveLocation() {

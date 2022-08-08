@@ -49,7 +49,7 @@
         <td>{{location.created_at | date:'dd.MM.yyyy, HH:mm'}}</td>
         <td>{{location.updated_at | date:'dd.MM.yyyy, HH:mm'}}</td>
         <td>
-          <i class="pi pi-globe"></i>
+          <i class="pi pi-globe" (click)="openMap(location)"></i>
         </td>
         <td>
           <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2"
@@ -73,8 +73,16 @@
     <div class="p-field">
       <label for="description">Description</label>
       <textarea id="description" pInputTextarea [(ngModel)]="location.content" required rows="3" cols="20"></textarea>
+      <small class="p-invalid" *ngIf="submitted && !location.title">Description is required.</small>
     </div>
-
+    <div class="p-field">
+      <label for="latitude">Latitude</label>
+      <input type="number" pInputText id="latitude" [(ngModel)]="location.lat"/>
+    </div>
+    <div class="p-field">
+      <label for="longitude">Longitude</label>
+      <input type="number" pInputText id="longitude" [(ngModel)]="location.long"/>
+    </div>
   </ng-template>
 
   <ng-template pTemplate="footer">

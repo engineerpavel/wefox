@@ -5,8 +5,8 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import {ConfirmationService, MessageService} from 'primeng/api';
-import {LocationModel} from '../../models/tabledata.model';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { LocationModel } from '../../models/tabledata.model';
 
 @Component({
   selector: 'app-wefox-table',
@@ -41,8 +41,7 @@ export class WefoxTableComponent {
   constructor(
     private confirmationService: ConfirmationService,
     private messageService: MessageService
-  ) {
-  }
+  ) {}
 
   openNew(): void {
     this.location = new LocationModel();
@@ -56,7 +55,7 @@ export class WefoxTableComponent {
       header: 'Confirm',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        let ids = this.selectedLocations.map(({id}) => id);
+        let ids = this.selectedLocations.map(({ id }) => id);
         this.removeLocations.emit(ids);
         this.selectedLocations = [];
       },
@@ -76,7 +75,7 @@ export class WefoxTableComponent {
   }
 
   editLocation(location: LocationModel) {
-    this.location = {...location};
+    this.location = { ...location };
     this.locationDialog = true;
   }
 
@@ -85,8 +84,11 @@ export class WefoxTableComponent {
     this.submitted = false;
   }
 
-  showDetails() {
-
+  openMap(location: LocationModel): void {
+    if (location && location.lat!.length && location.long!.length) {
+      const url = `http://www.google.com/maps/place/${location.lat},${location.long}`;
+      window.open(url, '_blank');
+    }
   }
 
   saveLocation() {

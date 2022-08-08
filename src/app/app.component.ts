@@ -72,17 +72,14 @@ export class AppComponent implements OnInit {
   }
 
   removeArr(ids: string[]): void {
-    this.crudService
-      .removeItems(ids)
-      .pipe(first())
-      .subscribe(() => {
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Successful',
-          detail: 'Locations Deleted',
-          life: 4000,
-        });
-        this.getLocations();
+    this.crudService.removeItems(ids).subscribe(() => {
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Successful',
+        detail: 'Location Deleted',
+        life: 4000,
       });
+      this.getLocations();
+    });
   }
 }
